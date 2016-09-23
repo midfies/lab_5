@@ -54,11 +54,17 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function sumAndMultiply(a,b,c){ //eslint-disable-line
-  var sum = a + b + c;
-  var messageSum = a + ' and ' + b + ' and ' + c + ' sum to ' + sum + '.';
-  var product = a * b * c;
-  var messageProduct = 'The product of ' + a + ' and ' + b + ' and ' + c + ' is ' + product + '.';
-  var output = [sum, product, messageSum, messageProduct];
+  var sumArray = sum(a,b);
+  var sumAB = sumArray[0];
+  sumArray = sum(sumAB,c);
+  var sumABC = sumArray[0];
+  var messageSum = a + ' and ' + b + ' and ' + c + ' sum to ' + sumABC + '.';
+  var productArray = multiply(a,b);
+  var productAB = productArray[0];
+  productArray = multiply(productAB, c);
+  var productABC = productArray[0];
+  var messageProduct = 'The product of ' + a + ' and ' + b + ' and ' + c + ' is ' + productABC + '.';
+  var output = [sumABC, productABC, messageSum, messageProduct];
   return output;
 }
 
@@ -81,18 +87,19 @@ Test this function by hand in the console to get it working, and when you think 
 var testArray = [2,3,4]; //eslint-disable-line
 
 function sumArray(testArray){ //eslint-disable-line
-  var sum = 0;
+  var totalSum = 0;
   var message = '';
   for (var i = 0; i < testArray.length; i++){
-    sum += testArray[i];
+    var totalSumArray = sum(totalSum, testArray[i]);
+    totalSum = totalSumArray[0];
     if (i === testArray.length - 1){
       message += testArray[i];
     } else {
       message += testArray[i] + ',';
     }
   }
-  message += ' was passed in as an array of numbers, and ' + sum + ' is their sum.';
-  var output = [sum, message];
+  message += ' was passed in as an array of numbers, and ' + totalSum + ' is their sum.';
+  var output = [totalSum, message];
   return output;
 }
 
@@ -114,18 +121,19 @@ Test this function by hand in the console to get it working, and when you think 
 
 // Write your code here
 function multiplyArray(testArray){ //eslint-disable-line
-  var product = 1;
+  var totalProduct = 1;
   var message = 'The numbers ';
   for (var i = 0; i < testArray.length; i++){
-    product *= testArray[i];
+    var totalProductArray = multiply(totalProduct, testArray[i]);
+    totalProduct = totalProductArray[0];
     if (i === testArray.length - 1){
       message += testArray[i];
     } else {
       message += testArray[i] + ',';
     }
   }
-  message += ' have a product of ' + product + '.';
-  var output = [product, message];
+  message += ' have a product of ' + totalProduct + '.';
+  var output = [totalProduct, message];
   return output;
 }
 
